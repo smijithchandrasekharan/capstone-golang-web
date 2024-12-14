@@ -8,5 +8,7 @@ import (
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("edit.html")
-	t.Execute(w, "he")
+	t.Execute(w, r.URL.RawPath)
+
+	//
 }

@@ -1,22 +1,19 @@
 package main
 
 import (
-    "fmt"
-    "log"
-    "net/http"
-	""
+	"fmt"
+	"log"
+	"net/http"
 
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Hi  %s!", r.URL.Path[1:])
+	fmt.Fprintf(w, "Hi  %s!", r.URL.Path[1:])
 }
 
-
-
 func main() {
-	http.HandleFunc("/login/", editHandler)
-    http.HandleFunc("/sign/", handler)
-    //http.HandleFunc("/save/", handler)
-    log.Fatal(http.ListenAndServe(":8080", nil))
+	//http.HandleFunc("/login/", loginHandler)
+	http.HandleFunc("/sign/", handler)
+	//http.HandleFunc("/save/", handler)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
