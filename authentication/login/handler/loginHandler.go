@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func editHandler(w http.ResponseWriter, r *http.Request) {
+func loginHandler(w http.ResponseWriter, r *http.Request) {
 	//title := r.URL.Path[len("/edit/"):]
 	//p, err := loadPage(title)
 	//if err != nil {
