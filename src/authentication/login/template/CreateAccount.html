@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>{{ .title }}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="./css/style.css">
+
+</head>
+<body>
+
+<div class="logo text-center">
+  <h1>Registration</h1>
+</div>
+<div class="wrapper">
+  <div class="inner-warpper text-center">
+    <h2 class="title">Fill your details</h2>
+	<h3 class="title" background-color="green">{{ .message }}</h3>
+    <form action="/CreateAccount" id="formvalidate" method="POST">
+      <div class="input-group">
+        <label class="palceholder" for="userName">User Name</label>
+        <input class="form-control" name="userName" id="userName" type="text" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+      <div class="input-group">
+        <label class="palceholder" for="userPassword">Password</label>
+        <input class="form-control" name="userPassword" id="userPassword" type="password" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+	  <div class="input-group">
+        <label class="palceholder" for="userEmail">Email</label>
+        <input class="form-control" name="userEmail" id="userEmail" type="Email" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+	  <div class="input-group">
+        <label class="palceholder" for="userPhone">Phone</label>
+        <input class="form-control" name="userPhone" id="userPhone" type="Phone" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+      <button type="submit" id="login">Create</button>
+	  <a class="forgot pull-right" href="/login">Login Page</a> 
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

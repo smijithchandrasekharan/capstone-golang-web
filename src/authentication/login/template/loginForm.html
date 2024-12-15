@@ -1,42 +1,43 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en" >
 <head>
-    <title>HTML Login Form</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>{{ .title }}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="./css/style.css">
+
 </head>
-
 <body>
-    <div class="main">
-        <h1>Task Management System</h1>
-        <h3>Enter your login credentials</h3>
+<!-- partial:index.partial.html -->
+<div class="logo text-center">
+  <h1>Task Management System</h1>
+</div>
+<div class="wrapper">
+  <div class="inner-warpper text-center">
+    <h2 class="title">Login to your account</h2>
+    <form action="/LoginUser" id="formvalidate" method="POST">
+      <div class="input-group">
+        <label class="palceholder" for="userName">User Name</label>
+        <input class="form-control" name="userName" id="userName" type="text" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+      <div class="input-group">
+        <label class="palceholder" for="userPassword">Password</label>
+        <input class="form-control" name="userPassword" id="userPassword" type="password" placeholder="" />
+        <span class="lighting"></span>
+      </div>
 
-        <form action="">
-            <label for="Name">
-                Username:
-            </label>
-            <input type="text" id="name" name="Name" 
-                placeholder="Enter your Username" required>
+      <button type="submit" id="login" action="/LoginUser" >Login</button>
+    
+      </div>
+    </form>
+  </div>
+  <div class="signup-wrapper text-center">
+    <a href="./signUp">Don't have an accout? <span class="text-primary">Create One</span></a>
+  </div>
+</div>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js'></script><script  src="./script.js"></script>
 
-            <label for="Password">
-                Password:
-            </label>
-            <input type="password" id="password" name="password" 
-           </div>
-        </form>
-        
-                  placeholder="Enter your Password" required>
-
-            <div class="wrap">
-                <button type="submit">
-                    Submit
-                </button>
-       <p>Not registered?
-            <a href="#" style="text-decoration: none;">
-                Create an account
-            </a>
-        </p>
-    </div>
 </body>
-
 </html>
