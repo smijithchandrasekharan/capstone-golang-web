@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
@@ -20,6 +21,16 @@ type User struct {
 	DOB       time.Time // Date of birth of the user
 	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP"` // When the user was created in the system
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP"` // When the user was last updated in the system
+}
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
 }
 
 func ConnectToPostgreSQL() (*gorm.DB, error) {
@@ -47,7 +58,7 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLFiles("./src/authentication/login/template/loginForm.html",
 		"./src/authentication/login/template/CreateAccount.html",
-	"./src/dashboard/home/template/index.html")
+		"./src/dashboard/home/template/index.html")
 	router.Static("/css", "./src/authentication/login/template/css")
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
@@ -80,23 +91,29 @@ func main() {
 	})
 
 	router.POST("/CreateAccount", func(c *gin.Context) {
-
+		message := ""
 		user := c.PostForm("userName")
 		password := c.PostForm("userPassword")
+		hashed,err:= HashPassword(password)
 		mail := c.PostForm("userEmail")
 		phone := c.PostForm("userPhone")
-		newUser := User{Username: user, Password: password, Email: mail, Phone: phone}
-		db.Create(&newUser)
+		newUser := User{Username: user, Password: hashed, Email: mail, Phone: phone}
+		if(err !=nil){
+			message = "Password hashing failed"
+		}else{
+			db.Create(&newUser)
+		}
 		defer func(newUser *User) {
-			message := ""
-			if newUser.ID>0{
-				message="Created User Successfully"
+			if newUser.ID > 0 {
+				message = "Created User Successfully"
 			}
 			c.HTML(http.StatusOK, "CreateAccount.html", gin.H{
 				"message": message,
-				"title" : "Create Account",
+				"title":   "Create Account",
 			})
 		}(&newUser)
+		
+		
 	})
 
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
