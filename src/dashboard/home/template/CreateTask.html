@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>{{ .title }}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="./css/style.css">
+
+</head>
+<body>
+
+<div class="logo text-center">
+  <h1>Create your Task</h1>
+</div>
+<div class="wrapper">
+  <div class="inner-warpper text-center">
+    <h2 class="title">Fill your details</h2>
+	<h3 class="title" background-color="green">{{ .message }}</h3>
+    <form action="/CreateTask" id="formvalidate" method="POST">
+      <div class="input-group">
+        <label class="palceholder" for="title">Title</label>
+        <input class="form-control" name="title" id="title" type="textarea" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+      <div class="input-group">
+        <label class="palceholder" for="priority">Priority</label>
+        <input class="form-control" name="priority" id="priority" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+	  <div class="input-group">
+        <label class="palceholder" for="description">Description</label>
+        <input class="form-control" name="description" id="description" type="textarea" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+	  <div class="input-group">
+        <label class="palceholder" for="dueDate">DueDate</label>
+        <input class="form-control" name="dueDate" id="dueDate" type="datetime" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+	   <div class="input-group">
+        <label class="palceholder" for="status">Status</label>
+        <input class="form-control" name="status" id="status" type="text" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+	   <div class="input-group">
+        <label class="palceholder" for="category">Category</label>
+        <input class="form-control" name="category" id="category" type="text" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+	  <div class="input-group">
+        <label class="palceholder" for="project">Project</label>
+        <input class="form-control" name="project" id="project" type="text" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+      <button type="submit" id="login">Create</button>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js'></script>
+
+</body>
+</html>
