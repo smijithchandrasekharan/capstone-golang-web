@@ -4,55 +4,189 @@
   <meta charset="UTF-8">
   <title>{{ .title }}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="../css/style.css">
+<script>
+        window.onload = function() {
+            var button = document.getElementById("btnTaskAction");
+			if({{.EnableButton}} == "false")
+			{
+            button.removeAttribute("disabled");
+			}
+        };
+    </script>
+	<style>
+  .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: #1e4451;
+}
+nav li {
+  display: inline-block;
+  position: relative;
+}
+nav a {
+  display: block;
+  padding: 0 10px;
+  line-height: 50px;
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+}
+nav ul ul {
+  position: absolute;
+  top: 51px;
+  left: 0px;
+  display: none;
+}
+nav ul li:hover > ul {
+  display:block;
+}
+nav ul ul li {
+  width:200px;
+}
+nav ul ul ul{
+  top: 0;
+  left: 200px;
+}
+nav a:hover {
+  background-color:#63b175;
+}
 
+.menu-icon {
+  flex-direction: column;
+  justify-content: space-between;
+  height: 18px;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  display:none;
+}
+
+.bar {
+  width: 24px;
+  height: 3px;
+  background-color: #1e4451;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-icon:hover .bar {
+  background-color: #63b175;
+}
+
+@media screen and (max-width: 767px) {
+  .menu-icon {
+    display: flex;
+  }
+  nav ul {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 100%;
+    height: auto;
+    display:none;
+  }
+  nav li {
+    width: 100%;
+    position: relative;
+    display: block;
+    border-bottom: 1px solid #f2f2f2;
+  }
+  nav ul ul {
+    position: static;
+  }
+  nav ul ul li {
+    width:100%;
+    display: block;
+    border: none;
+    left: 0.5em;
+    border-top: 1px dotted #f2f2f2;
+  }
+  nav ul ul ul li {
+    left: 0.5em;
+  }
+}
+</style>
 </head>
 <body>
+<div class="menu-icon">
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+</div>
 
+ <nav>
+  <ul>
+    <li><a href="javascript:window.history.back();">Back</a></li>
+	 <li><a href="/Home">Home</a></li>
+    <li>
+      <a href="#">Task</a>
+      <ul>
+        <li>
+          <a href="#">Maintenance</a>
+          <ul>
+            <li><a href="/NavigateCreateTask">Create</a></li>
+            <!-- <li><a href="#">Social Media</a></li> -->
+            <!-- <li><a href="#">Email Marketing</a></li> -->
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <!-- <li><a href="#">Contact Us</a></li> -->
+  </ul>
+ </nav>
 <div class="logo text-center">
-  <h1>Create your Task</h1>
+  <h1>{{.TaskAction}} your Task</h1>
 </div>
 <div class="wrapper">
   <div class="inner-warpper text-center">
     <h2 class="title">Fill your details</h2>
 	<h3 class="title" background-color="green">{{ .message }}</h3>
-    <form action="/CreateTask" id="formvalidate" method="POST">
+    <form action="{{.frmAction}}" id="formvalidate" method="POST">
       <div class="input-group">
         <label class="palceholder" for="title">Title</label>
-        <input class="form-control" name="title" id="title" type="textarea" placeholder="" />
+        <input class="form-control" name="title" id="title" type="textarea" placeholder="" value="{{.TaskTitle}}" />
         <span class="lighting"></span>
       </div>
       <div class="input-group">
         <label class="palceholder" for="priority">Priority</label>
-        <input class="form-control" name="priority" id="priority" placeholder="" />
+        <input class="form-control" name="priority" id="priority" placeholder="" value="{{.Priority}}" />
         <span class="lighting"></span>
       </div>
 	  <div class="input-group">
         <label class="palceholder" for="description">Description</label>
-        <input class="form-control" name="description" id="description" type="textarea" placeholder="" />
+        <input class="form-control" name="description" id="description" type="textarea" placeholder="" value="{{.Description}}"  />
         <span class="lighting"></span>
       </div>
 	  <div class="input-group">
         <label class="palceholder" for="dueDate">DueDate</label>
-        <input class="form-control" name="dueDate" id="dueDate" type="datetime" placeholder="" />
+        <input class="form-control" name="dueDate" id="dueDate" type="datetime" placeholder="" value="{{.DueDate}}"/>
         <span class="lighting"></span>
       </div>
 	   <div class="input-group">
         <label class="palceholder" for="status">Status</label>
-        <input class="form-control" name="status" id="status" type="text" placeholder="" />
+        <input class="form-control" name="status" id="status" type="text" placeholder="" value="{{.Status}}"/>
         <span class="lighting"></span>
       </div>
 	   <div class="input-group">
         <label class="palceholder" for="category">Category</label>
-        <input class="form-control" name="category" id="category" type="text" placeholder="" />
+        <input class="form-control" name="category" id="category" type="text" placeholder="" value="{{.Category}}"/>
         <span class="lighting"></span>
       </div>
 	  <div class="input-group">
         <label class="palceholder" for="project">Project</label>
-        <input class="form-control" name="project" id="project" type="text" placeholder="" />
+        <input class="form-control" name="project" id="project" type="text" placeholder="" value="{{.Project}}"/>
         <span class="lighting"></span>
       </div>
-      <button type="submit" id="login">Create</button>
+      <button type="submit" disabled="{{.EnableButton}}" id="btnTaskAction">{{.TaskAction}}</button>
 
       </div>
     </form>

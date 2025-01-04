@@ -4,7 +4,25 @@
 <title>Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+  function confirmNavigation(event,ID) {
+    event.preventDefault(); // Prevent the default link action
+    const userConfirmed = confirm("Do you want to delete the Task?");
+    
+    if (userConfirmed) {
+      window.location.href = "/Delete/"+ID; // Replace with your desired URL
+    }
+  }
+</script>
 <style>
+  .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
 nav ul {
   list-style: none;
   margin: 0;
@@ -109,13 +127,6 @@ nav a:hover {
   <ul>
     <li><a href="#">Home</a></li>
     <li>
-      <a href="#">About</a>
-      <ul>
-        <li><a href="#">Our Team</a></li>
-        <li><a href="#">Mission & Vision</a></li>
-      </ul>
-    </li>
-    <li>
       <a href="#">Task</a>
       <ul>
         <li>
@@ -128,7 +139,7 @@ nav a:hover {
         </li>
       </ul>
     </li>
-    <li><a href="#">Contact Us</a></li>
+    <!-- <li><a href="#">Contact Us</a></li> -->
   </ul>
  </nav>
  <h1>{{.message}}</h1>
@@ -139,7 +150,7 @@ $(function() {
   });
 });
 </script>
-<table border="solid">
+<table class="styled-table">
 
 <tr>
 	<th>ID</th>
@@ -162,6 +173,9 @@ $(function() {
 		<td>{{.Category}}</td>
 		<td>{{.Status}}</td>
 		<td>{{.DueDate}}</td></td>
+    <td><a href='/NavigateEditTask/{{.ID}}'>Edit</a></td></td>
+    <td><a href='/NavigateViewTask/{{.ID}}'>View</a></td></td>
+    <td><a href='/Delete/{{.ID}}' onclick="confirmNavigation(event,{{.ID}})">Delete</a></td></td>
 	</tr>
     {{ end }}
 </table>
