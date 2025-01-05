@@ -2,14 +2,14 @@ package testhandler
 
 import (
 	"bytes"
+	"capstone-golang-web/src/CommonHandler"
+	"capstone-golang-web/src/authentication/login/handler"
+	"capstone-golang-web/src/dashboard/TaskHandler"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
-	"capstone-golang-web/src/authentication/login/handler"
-	"capstone-golang-web/src/dashboard/TaskHandler"
-	"capstone-golang-web/src/CommonHandler"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
